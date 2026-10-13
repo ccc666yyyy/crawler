@@ -10,28 +10,9 @@ options=webdriver.EdgeOptions()
 options.add_experimental_option("detach",True)
 driver=webdriver.Edge(options=options)
 sub_url=[]
-# driver.get("https://movie.douban.com/top250")
-#
-# WebDriverWait(driver, 20).until(
-#     EC.presence_of_element_located(
-#         (By.XPATH, '//div[@class="hd"]/a')
-#     )
-# )
-#
-# html = etree.HTML(driver.page_source)
-#
-# urls = html.xpath('//div[@class="hd"]/a/@href')
-#
-# print(len(urls))
-# print(urls[:3])
 
 for start in range(0,250,25):
     url="https://movie.douban.com/top250?start="+str(start)
-
-    header={
-    "user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0"
-    }
-    res=requests.get(url,headers=header)
     driver.get(url)
 
     WebDriverWait(driver, 120).until(
@@ -67,13 +48,11 @@ with open('douban_top250.csv','a',encoding='utf-8',newline='') as f:
         num=sub_html.xpath('//*[@id="content"]/div[1]/span[1]/text()')
         title=sub_html.xpath('//*[@id="content"]/h1/span[1]/text()')
         year=sub_html.xpath('//*[@id="content"]/h1/span[2]/text()')
-
         direct=sub_html.xpath('//*[@id="info"]/span[1]/span[2]/a/text()')
         if len(direct) > 1:
             direct = "/".join(direct)
         elif len(direct) == 1:
             direct = direct[0]
-
 
         dramatist=sub_html.xpath('//span[text()="编剧"]/following-sibling::span//a[not(@class="more-attrs")]/text()')
 

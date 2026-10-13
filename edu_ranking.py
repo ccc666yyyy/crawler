@@ -9,9 +9,6 @@ header={
     "User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36 Edg/155.0.0.0",
     "Referer":url
 }
-# res=requests.get(url,headers=header)
-# res.encoding="utf-8"
-
 payload_url = "https://www.shanghairanking.cn/_nuxt/static/1789974610/rankings/bcur/2024/payload.js"
 
 r = requests.get(payload_url, headers=header)
